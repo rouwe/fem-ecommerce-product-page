@@ -16,6 +16,14 @@
     vertical-align: top;
     background-image: none;
 }
+/* Offcanvas */
+.close-menu {
+    background-image: none;
+}
+.close-menu path {
+    fill: black;
+    opacity: 0.75;
+}
 /* Navbar brand */
 .header-logo {
     transform: translate(0.25rem , -0.09rem);
