@@ -1,0 +1,30 @@
+/* Header */
+.main-header {
+    padding-bottom: 0.75rem;
+}
+/* Menu toggler */
+.mobile-menu {
+    transform: translateY(0.05rem);
+    border: none;
+}
+.mobile-menu:focus {
+    box-shadow: none;
+}
+.open-menu {
+    width: auto;
+    height: auto;
+    vertical-align: top;
+    background-image: none;
+}
+/* Navbar brand */
+.header-logo {
+    transform: translate(0.25rem , -0.09rem);
+}
+/* User cart and profile  */
+.user-details-box {
+    transform: translate(0.3rem, 0.15rem);
+}
+.badge-custom {
+    left: 0.4rem;    
+    transform: scale(0.8) translateY(-0.3rem);
+}
