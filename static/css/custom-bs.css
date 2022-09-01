@@ -1,5 +1,5 @@
 /* Header */
-.main-header {
+.main-header .row {
     padding-bottom: 0.75rem;
 }
 /* Menu toggler */
@@ -36,3 +36,8 @@
     left: 0.4rem;    
     transform: scale(0.8) translateY(-0.3rem);
 }
+/* @media (min-width: 992px) {
+    .main-header div.row {
+        border-bottom: 1px solid red;
+    }
+} */
