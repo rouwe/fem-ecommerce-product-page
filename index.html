@@ -27,10 +27,10 @@
 </head>
 
 <body>
-    <header class="container main-header">
+    <header class="container main-header px-2 px-lg-4 px-xxl-5 pt-xxl-4 mx-xxl-5">
       <!-- Header -->
-      <div class="row justify-content-sm-between justify-content-xl-center justify-content-around">
-        <div class="col-8 col-sm-8 col-md-8 col-lg-9 col-xl-8 col-xxl-8 me-xxl-4">
+      <div class="row justify-content-around justify-content-sm-between p-0 mx-xxl-5 gx-lg-0">
+        <div class="col-8 col-sm-8 col-md-8 col-lg-9 col-xl-8 col-xxl-8 ms-xxl-3">
           <!-- Navbar -->
           <nav class="navbar navbar-expand-lg">
             <div class="container-fluid justify-content-start px-0">
@@ -56,8 +56,8 @@
                   </button>
                 </div>
                 <!-- offcanvas body -->
-                <div class="offcanvas-body ps-4">
-                  <ul class="navbar-nav justify-content-end nav-link-list">
+                <div class="offcanvas-body ps-4 ms-xxl-3">
+                  <ul class="navbar-nav justify-content-end gap-3 nav-link-list">
                     <li class="nav-item">
                       <a class="nav-link" href="#" aria-current="page">Collections</a>
                     </li>
@@ -79,21 +79,26 @@
             </div>
           </nav>
         </div>
-        <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-2 col-xxl-2 ms-xxl-5">
+        <div class="col-4 col-sm-4 col-md-3 col-lg-3 col-xl-2 col-xxl-2 ms-xl-5 me-xxl-3">
           <!-- User cart and Profile -->
-          <div class="d-flex h-100 justify-content-evenly align-items-center py-2 py-lg-0 user-details-box">
+          <div class="d-flex w-100 h-100 justify-content-evenly justify-content-lg-between align-items-center ms-xxl-3 py-2 py-lg-0 user-details-box">
             <!-- cart -->
-            <button class="btn w-50 border-0 position-relative me-1 ms-xxl-2 p-0" type="button">
+            <button class="btn w-50 border-0 position-relative p-0 ms-lg-auto me-lg-4" type="button">
               <span class="d-inline-block">
                 <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill="#69707D" fill-rule="nonzero"/></svg>
               </span>
                 <span class="badge bg-warning badge-custom position-absolute d-none">3</span>
             </button>
             <!-- profile avatar -->
-            <div class="w-25 me-3">
+            <div class="w-25">
               <img class="img-fluid align-top" src="./images/image-avatar.png" alt="A selfie of a person with sunglass">
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row d-none d-lg-flex p-0 gx-lg-0">
+        <div class="col p-0">
+          <hr>
         </div>
       </div>
     </header>
