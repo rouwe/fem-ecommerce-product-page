@@ -1,6 +1,10 @@
+body {
+    overflow: hidden;
+}
 /* Header */
-.main-header .row {
+.main-header {
     padding-bottom: 0.75rem;
+    background-color: rgb(255, 255, 255);
 }
 /* Menu toggler */
 .mobile-menu {
@@ -37,6 +41,12 @@
     transform: scale(0.8) translateY(-0.3rem);
 }
 /* Product container */
+.prod-preview-box {
+    margin: 0 -0.75rem;
+}
+.preview {
+    margin-top: -2.3rem;
+}
 /* @media (min-width: 576px) {
   }
   @media (min-width: 768px) {

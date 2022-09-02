@@ -28,7 +28,7 @@
 
 <body>
   <!-- Header -->
-  <header class="container main-header px-2 px-lg-4 pt-lg-3 pt-xl-4 px-xxl-5 pt-xxl-4 mx-xxl-auto">
+  <header class="container main-header px-lg-4 pt-lg-3 pt-xl-4 px-xxl-5 pt-xxl-4 mx-xxl-auto">
     <div class="row justify-content-around justify-content-sm-between p-0 pb-lg-3 pb-xxl-2 mb-lg-3 mb-xxl-4 mx-xxl-5 gx-lg-0">
       <div class="col-8 col-sm-8 col-md-8 col-lg-9 col-xl-8 col-xxl-8 ms-xxl-3">
         <!-- Navbar -->
@@ -90,8 +90,8 @@
               <span class="badge bg-warning badge-custom position-absolute d-none">0</span>
           </button>
           <!-- profile avatar -->
-          <div class="w-50 px-2 px-lg-3">
-            <img class="img-fluid align-top" src="./images/image-avatar.png" alt="A selfie of a person with sunglass">
+          <div class="w-50 px-2 px-lg-2">
+            <img class="img-fluid align-top ps-1 pe-2 ps-lg-0" src="./images/image-avatar.png" alt="A selfie of a person with sunglass">
           </div>
         </div>
       </div>
@@ -104,11 +104,33 @@
     </div>
   </header>
   <!-- Main -->
-  <main class="container main-content px-2 px-lg-4 pt-lg-3 pt-xl-4 px-xxl-5 pt-xxl-4 mx-xxl-auto">
+  <main class="container main-content px-lg-4 pt-lg-3 pt-xl-4 px-xxl-5 pt-xxl-4 mx-xxl-auto">
     <div class="row">
-      <!-- Product Shoc -->
-      <div class="col"></div>
-      <div class="col"></div>
+      <!-- Product Showcase -->
+      <div class="col-12">
+        <div class="overflow-hidden prod-preview-box">
+          <!-- preview -->
+          <div class="preview">
+            <img class="img-fluid" src="./images/image-product-1.jpg" alt="White sneakers">
+          </div>
+          <!-- close lightbox -->
+          <button class="btn border-0">
+            <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill="#69707D" fill-rule="evenodd"/></svg>
+          </button>
+          <!-- prev -->
+          <button class="btn border-0">
+            <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+          </button>
+          <!-- next -->
+          <button class="btn border-0">
+            <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Product Details -->
+      <div class="col-12">
+
+      </div>
     </div>
   </main>
   <!--
