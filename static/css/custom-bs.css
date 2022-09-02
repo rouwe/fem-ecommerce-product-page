@@ -1,6 +1,3 @@
-body {
-    overflow: hidden;
-}
 /* 
 Header
 */
@@ -67,10 +64,10 @@ MAIN
     transform: scale(0.75);
 }
 .prev-btn {
-    left: 1rem;
+    left: 1.1rem;
 }
 .next-btn {
-    right: 1rem;
+    right: 1.1rem;
 }
 /* @media (min-width: 576px) {
   }
