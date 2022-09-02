@@ -36,8 +36,14 @@
     left: 0.4rem;    
     transform: scale(0.8) translateY(-0.3rem);
 }
-/* @media (min-width: 992px) {
-    .main-header div.row {
-        border-bottom: 1px solid red;
-    }
-} */
+/* Product container */
+/* @media (min-width: 576px) {
+  }
+  @media (min-width: 768px) {
+  }
+  @media (min-width: 992px) {
+  }
+  @media (min-width: 1200px) {
+  }
+  @media (min-width: 1400px) {
+  } */
