@@ -1,7 +1,9 @@
 body {
     overflow: hidden;
 }
-/* Header */
+/* 
+Header
+*/
 .main-header {
     padding-bottom: 0.75rem;
     background-color: rgb(255, 255, 255);
@@ -40,12 +42,35 @@ body {
     left: 0.4rem;    
     transform: scale(0.8) translateY(-0.3rem);
 }
+/* 
+MAIN
+*/
 /* Product container */
 .prod-preview-box {
     margin: 0 -0.75rem;
 }
 .preview {
     margin-top: -2.3rem;
+}
+.close-lightbox-btn {
+    top: -3rem;
+    right: 0;
+}
+.prev-btn,
+.next-btn {
+    top: calc(50% - 2.3rem);
+    background-color: rgb(255, 255, 255);
+    transform: scale(1.1);
+}
+.prev-btn path,
+.next-btn path {
+    transform: scale(0.75);
+}
+.prev-btn {
+    left: 1rem;
+}
+.next-btn {
+    right: 1rem;
 }
 /* @media (min-width: 576px) {
   }
