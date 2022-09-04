@@ -11,21 +11,21 @@
                 "currency": "$"
             },
             "previewSources":  {
-                "preview0":  {
-                    "full": "./images/image-product-1.jpg",
-                    "thumbnail": "./images/image-product-1-thumbnail.jpg"
-                },
                 "preview1":  {
                     "full": "./images/image-product-1.jpg",
                     "thumbnail": "./images/image-product-1-thumbnail.jpg"
                 },
                 "preview2":  {
-                    "full": "./images/image-product-1.jpg",
-                    "thumbnail": "./images/image-product-1-thumbnail.jpg"
+                    "full": "./images/image-product-2.jpg",
+                    "thumbnail": "./images/image-product-2-thumbnail.jpg"
                 },
                 "preview3":  {
-                    "full": "./images/image-product-1.jpg",
-                    "thumbnail": "./images/image-product-1-thumbnail.jpg"
+                    "full": "./images/image-product-3.jpg",
+                    "thumbnail": "./images/image-product-3-thumbnail.jpg"
+                },
+                "preview4":  {
+                    "full": "./images/image-product-4.jpg",
+                    "thumbnail": "./images/image-product-4-thumbnail.jpg"
                 }
             }
         }        
