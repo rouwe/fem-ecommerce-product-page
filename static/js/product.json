@@ -1,29 +1,29 @@
 {
     "product":
         {
-            "product-seller": "Sneaker Company",
-            "product-name": "Fall Limited Edition Sneakers",
-            "product-description": "hese low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.",
-            "price-info": {
-                "discounted-price": "125.00",
-                "discount-percentage": "50%",
-                "original-price": "250.00",
+            "productSeller": "Sneaker Company",
+            "productName": "Fall Limited Edition Sneakers",
+            "productDescription": "hese low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.",
+            "priceInfo": {
+                "discountedPrice": "125.00",
+                "discountPercentage": "50%",
+                "originalPrice": "250.00",
                 "currency": "$"
             },
-            "preview-sources":  {
-                "preview-0":  {
+            "previewSources":  {
+                "preview0":  {
                     "full": "./images/image-product-1.jpg",
                     "thumbnail": "./images/image-product-1-thumbnail.jpg"
                 },
-                "preview-1":  {
+                "preview1":  {
                     "full": "./images/image-product-1.jpg",
                     "thumbnail": "./images/image-product-1-thumbnail.jpg"
                 },
-                "preview-2":  {
+                "preview2":  {
                     "full": "./images/image-product-1.jpg",
                     "thumbnail": "./images/image-product-1-thumbnail.jpg"
                 },
-                "preview-3":  {
+                "preview3":  {
                     "full": "./images/image-product-1.jpg",
                     "thumbnail": "./images/image-product-1-thumbnail.jpg"
                 }
