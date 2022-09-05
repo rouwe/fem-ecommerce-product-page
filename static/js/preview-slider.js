@@ -15,6 +15,45 @@ function addSliderButtonListener(containerClass, prevClass, nextClass, clickHand
         navigator.addEventListener("click", clickHandler);
     }
 }
+export function sliderButtonHandler () {
+    /*
+    Handles the prev and next slider events.
+        :@param previewSources: Object - contains the product img preview sources. 
+        :return undefined:
+    */
+   const [staticShowcaseClass, lightBoxShowcaseClass, previewClass] = ["static-showcase", "lightbox-showcase", "preview-img"];
+   const staticContainer = document.getElementsByClassName(staticShowcaseClass)[0];
+   const lightBoxContainer = document.getElementsByClassName(lightBoxShowcaseClass)[0];
+   const staticPreview = staticContainer.getElementsByClassName(previewClass)[0]
+   const lightBoxPreview = lightBoxContainer.getElementsByClassName(previewClass)[0];
+   let getSource = lightBoxPreview.getAttribute("src");
+   const regExp = /\d[$.]/; // pattern to look for preview source number
+   const previewNumIndex = getSource.search(regExp);
+   let previewNum = Number(getSource[regExp.exec(getSource)["index"]]);
+   console.log(previewNum, previewNumIndex)
+   // check slider button type
+   const isPrevButton = this.classList.contains("prev-btn");
+   const isNextButton = this.classList.contains("next-btn");
+   if (isPrevButton) {
+    // Handles prev source
+    if (previewNum === 1) {
+        previewNum = 4;
+    } else {
+        previewNum -= 1;
+    }
+    } else if (isNextButton) {
+        // Handles next source
+        if (previewNum === 4) {
+            previewNum = 1;
+        } else {
+            previewNum += 1;
+        }
+   }
+   const newSource = `${getSource.slice(0, previewNumIndex)}${previewNum}${getSource.slice(previewNumIndex + 1)}`;
+   console.log(newSource)
+   staticPreview.setAttribute("src", newSource);
+   lightBoxPreview.setAttribute("src", newSource);
+}
 function addCloseLightboxListener(containerClass, closeButtonClass, clickHandler) {
     /*
     Add event listeners for lightbox close button.

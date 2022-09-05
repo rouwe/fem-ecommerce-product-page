@@ -13,9 +13,7 @@ prodDataPromise.then((getData) => {
     const defaultPreviewSrc = previewSources[`preview${defaultNumSrc}`]["full"];
     Slider.setDefaultPreviewSrc("preview-img", defaultPreviewSrc);
     // Add event listener to preview buttons
-    Slider.addSliderButtonListener("lightbox-showcase", "prev-btn", "next-btn", function () {
-        console.log("Seller: ", productSeller, "|| Name: ", productName, "Caller: ", this);
-    });
+    Slider.addSliderButtonListener("lightbox-showcase", "prev-btn", "next-btn", Slider.sliderButtonHandler);
     // Add event listener to lightbox close button
     Slider.addCloseLightboxListener("lightbox-showcase", "close-lightbox-btn", function () {});
 });
