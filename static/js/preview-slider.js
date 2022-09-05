@@ -15,7 +15,7 @@ function addSliderButtonListener(containerClass, prevClass, nextClass, clickHand
         navigator.addEventListener("click", clickHandler);
     }
 }
-export function sliderButtonHandler () {
+function sliderButtonHandler () {
     /*
     Handles the prev and next slider events.
         :@param previewSources: Object - contains the product img preview sources. 
@@ -85,4 +85,4 @@ function previewSlider(productPreviewSrcObj) {
     */
 }
 export { previewSlider, addSliderButtonListener, setDefaultPreviewSrc,
-    addCloseLightboxListener }
+    addCloseLightboxListener, sliderButtonHandler }
