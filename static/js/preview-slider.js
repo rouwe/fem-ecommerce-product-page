@@ -30,7 +30,6 @@ function sliderButtonHandler () {
    const regExp = /\d[$.]/; // pattern to look for preview source number
    const previewNumIndex = getSource.search(regExp);
    let previewNum = Number(getSource[regExp.exec(getSource)["index"]]);
-   console.log(previewNum, previewNumIndex)
    // check slider button type
    const isPrevButton = this.classList.contains("prev-btn");
    const isNextButton = this.classList.contains("next-btn");
@@ -50,20 +49,40 @@ function sliderButtonHandler () {
         }
    }
    const newSource = `${getSource.slice(0, previewNumIndex)}${previewNum}${getSource.slice(previewNumIndex + 1)}`;
-   console.log(newSource)
    staticPreview.setAttribute("src", newSource);
    lightBoxPreview.setAttribute("src", newSource);
 }
-function addCloseLightboxListener(containerClass, closeButtonClass, clickHandler) {
+function addProductGalleryListener(galleryClassArr, clickHandler) {
+    /*
+    Add event listeners for product gallery (both static and lightbox).
+        :@param staticProdGalleryClass: String - the class selector of the static product gallery.
+        :@param lightBoxProdGalleryClass: String - the class selector of the lightbox product gallery.
+        :@param clickHandler: Function - the function to be used as event handler for both static and lightbox gallery.
+        :return undefined:
+    */
+    for (const galleryClass of galleryClassArr) {
+        const gallery = document.getElementsByClassName(galleryClass)[0].children;
+        console.log(gallery)
+        for (const thumbnailBox of gallery) {
+            const thumbnail = thumbnailBox.children[0];
+            thumbnail.addEventListener("click", clickHandler);
+        }
+    }
+}
+function productGalleryHandler () {
+    console.log("change preview image please!");
+}
+function addCloseLightBoxListener(containerClass, closeButtonClass, clickHandler) {
     /*
     Add event listeners for lightbox close button.
         :@param containerClass: String - the class selector of the targeted element container.
         :@param closeButtonClass: String - the class selector of the close button element.
         :@param clickHandler: Function - the function be used as event handler.
+        :return undefined:
     */
     const lightBoxContainer = document.getElementsByClassName(containerClass)[0];
     const closeLightBoxButton = lightBoxContainer.getElementsByClassName(closeButtonClass)[0];
-    document.addEventListener("click", clickHandler);
+    closeLightBoxButton.addEventListener("click", clickHandler);
 }
 function setDefaultPreviewSrc(previewImgClass, defaultPreviewSrc) {
     /*
@@ -85,4 +104,5 @@ function previewSlider(productPreviewSrcObj) {
     */
 }
 export { previewSlider, addSliderButtonListener, setDefaultPreviewSrc,
-    addCloseLightboxListener, sliderButtonHandler }
+    addCloseLightBoxListener, sliderButtonHandler, addProductGalleryListener,
+    productGalleryHandler }
