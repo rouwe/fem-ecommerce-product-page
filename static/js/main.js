@@ -18,6 +18,4 @@ prodDataPromise.then((getData) => {
     Slider.addCloseLightBoxListener("lightbox-showcase", "close-lightbox-btn", Slider.closeLightBoxHandler);
     // Add event listener to preview product gallery thumbnails
     Slider.addProductGalleryListener(["static-prod-gallery", "lightbox-prod-gallery"], Slider.productGalleryHandler);
-    // Add event listener to lightbox close button
-    Slider.addCloseLightBoxListener("lightbox-showcase", "close-lightbox-btn", function () {});
 });

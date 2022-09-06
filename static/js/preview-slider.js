@@ -48,9 +48,14 @@ function sliderButtonHandler () {
             previewNum += 1;
         }
    }
+   // Change both static and lightbox preview source
    const newSource = `${getSource.slice(0, previewNumIndex)}${previewNum}${getSource.slice(previewNumIndex + 1)}`;
    staticPreview.setAttribute("src", newSource);
    lightBoxPreview.setAttribute("src", newSource);
+   // Modify thumbnails    
+   const newThumbnailSource = `${getSource.slice(0, previewNumIndex)}${previewNum}-thumbnail${getSource.slice(previewNumIndex + 1)}`;
+   const thumbnailEventCaller = staticContainer.querySelector(`img[src="${newThumbnailSource}"]`);
+   setThumbnailMode(thumbnailEventCaller, staticContainer, lightBoxContainer);
 }
 function addProductGalleryListener(galleryClassArr, clickHandler) {
     /*
@@ -129,6 +134,7 @@ function productGalleryHandler () {
     const staticShowcase = document.getElementsByClassName("static-showcase")[0];
     const lightBoxShowcase = document.getElementsByClassName("lightbox-showcase")[0];
     const staticPreview = staticShowcase.getElementsByClassName("preview-img")[0];
+    // Sets the thumbnail active on or off
     setThumbnailMode(this, staticShowcase, lightBoxShowcase);
     // Change static showcase preview and thumbnail state
     staticPreview.setAttribute("src", newPreviewSource);
@@ -143,13 +149,13 @@ function productGalleryHandler () {
 function addCloseLightBoxListener(containerClass, closeButtonClass, clickHandler) {
     /*
     Add event listeners for lightbox close button.
+        :@param containerClass: String - the class selector of any ancestor of closeButtonClass element.
         :@param closeButtonClass: String - the class selector of the close button element.
         :@param clickHandler: Function - the function be used as event handler.
         :return undefined:
     */
     const lightBoxContainer = document.getElementsByClassName(containerClass)[0];
     const closeLightBoxButton = lightBoxContainer.getElementsByClassName(closeButtonClass)[0];
-    lightBoxContainer.addEventListener("click", clickHandler);
     closeLightBoxButton.addEventListener("click", clickHandler);
 }
 function closeLightBoxHandler() {
