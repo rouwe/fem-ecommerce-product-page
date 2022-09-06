@@ -14,6 +14,8 @@ prodDataPromise.then((getData) => {
     Slider.setDefaultPreviewSrc("preview-img", defaultPreviewSrc);
     // Add event listener to preview buttons
     Slider.addSliderButtonListener("lightbox-showcase", "prev-btn", "next-btn", Slider.sliderButtonHandler);
+    // Add event listener to lightbox close button
+    Slider.addCloseLightBoxListener("lightbox-showcase", "close-lightbox-btn", Slider.closeLightBoxHandler);
     // Add event listener to preview product gallery thumbnails
     Slider.addProductGalleryListener(["static-prod-gallery", "lightbox-prod-gallery"], Slider.productGalleryHandler);
     // Add event listener to lightbox close button

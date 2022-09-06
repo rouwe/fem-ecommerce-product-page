@@ -143,7 +143,7 @@
         </div>
       </div>
       <!-- Static Product Showcase -->
-      <div class="col-12 d-none d-lg-flex flex-lg-column col-lg-6 p-xxl-5 pt-xxl-4 prod-preview-container static-showcase">
+      <div class="col-12 d-none d-lg-flex flex-lg-column col-lg-6 p-xxl-5 pt-xxl-4 static-showcase">
         <div class="p-xxl-3 prod-preview-box">
           <!-- preview -->
           <div class="preview">
@@ -152,54 +152,56 @@
         </div>
         <!-- static product gallery -->
         <div class="row d-none d-lg-flex flex-nowrap px-lg-3 mt-lg-2 static-prod-gallery">
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-1-thumbnail.jpg" alt="Sneakers Company product view-1">
+          <div class="col gx-4 p-0 rounded-4 thumbnail-active">
+            <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-1-thumbnail.jpg" alt="Sneakers Company product view-1">
           </div>
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-2-thumbnail.jpg" alt="Sneakers Company product view-2">
+          <div class="col gx-4 p-0 rounded-4">
+            <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-2-thumbnail.jpg" alt="Sneakers Company product view-2">
           </div>
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-3-thumbnail.jpg" alt="Sneakers Company product view-3">
+          <div class="col gx-4 p-0 rounded-4">
+            <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-3-thumbnail.jpg" alt="Sneakers Company product view-3">
           </div>
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-4-thumbnail.jpg" alt="Sneakers Company product view-4">
+          <div class="col gx-4 p-0 rounded-4">
+            <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-4-thumbnail.jpg" alt="Sneakers Company product view-4">
           </div>
         </div>
       </div>
       <!-- Product Lightbox Showcase -->
-      <div class="col-12 col-lg-6 d-lg-none prod-preview-container lightbox-showcase">
-        <div class="position-relative overflow-hidden prod-preview-box">
-          <!-- preview -->
-          <div class="preview">
-            <img class="img-fluid preview-img" src="" alt="White sneakers">
+      <div class="col-12 col-lg-6 d-lg-none lightbox-showcase">
+        <div class="mx-lg-auto d-lg-flex flex-lg-column justify-content-center lightbox-container">
+          <div class="position-relative overflow-hidden prod-preview-box">
+            <!-- preview -->
+            <div class="preview">
+              <img class="img-fluid preview-img" src="" alt="White sneakers">
+            </div>
+            <!-- close lightbox -->
+            <button class="btn d-none d-lg-block position-absolute border-0 close-lightbox-btn">
+              <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill="#69707D" fill-rule="evenodd"/></svg>
+            </button>
+            <!-- prev -->
+            <button class="btn rounded-circle position-absolute border-0 prev-btn">
+              <svg class="position-relative" width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="4" fill="none" fill-rule="evenodd"/></svg>
+            </button>
+            <!-- next -->
+            <button class="btn rounded-circle position-absolute border-0 next-btn">
+              <svg class="position-relative" width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="4" fill="none" fill-rule="evenodd"/></svg>
+            </button>
           </div>
-          <!-- close lightbox -->
-          <button class="btn d-none position-absolute border-0 close-lightbox-btn">
-            <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg"><path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z" fill="#69707D" fill-rule="evenodd"/></svg>
-          </button>
-          <!-- prev -->
-          <button class="btn rounded-circle position-absolute border-0 prev-btn">
-            <svg class="position-relative" width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="4" fill="none" fill-rule="evenodd"/></svg>
-          </button>
-          <!-- next -->
-          <button class="btn rounded-circle position-absolute border-0 next-btn">
-            <svg class="position-relative" width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="4" fill="none" fill-rule="evenodd"/></svg>
-          </button>
-        </div>
-        <!-- product gallery -->
-        <!-- lightbox product gallery -->
-        <div class="row d-none d-lg-flex flex-nowrap px-lg-3 mt-lg-2 lightbox-prod-gallery">
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-1-thumbnail.jpg" alt="Sneakers Company product view-1">
-          </div>
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-2-thumbnail.jpg" alt="Sneakers Company product view-2">
-          </div>
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-3-thumbnail.jpg" alt="Sneakers Company product view-3">
-          </div>
-          <div class="col gx-4">
-            <img class="img-thumbnail rounded-4" src="./images/image-product-4-thumbnail.jpg" alt="Sneakers Company product view-4">
+          <!-- product gallery -->
+          <!-- lightbox product gallery -->
+          <div class="row d-none d-lg-flex flex-nowrap px-lg-3 mt-lg-2 lightbox-prod-gallery">
+            <div class="col gx-4 p-0 rounded-4 thumbnail-active">
+              <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-1-thumbnail.jpg" alt="Sneakers Company product view-1">
+            </div>
+            <div class="col gx-4 p-0 rounded-4">
+              <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-2-thumbnail.jpg" alt="Sneakers Company product view-2">
+            </div>
+            <div class="col gx-4 p-0 rounded-4">
+              <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-3-thumbnail.jpg" alt="Sneakers Company product view-3">
+            </div>
+            <div class="col gx-4 p-0 rounded-4">
+              <img class="img-thumbnail p-0 rounded-4" src="./images/image-product-4-thumbnail.jpg" alt="Sneakers Company product view-4">
+            </div>
           </div>
         </div>
       </div>

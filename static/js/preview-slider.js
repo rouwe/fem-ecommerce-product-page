@@ -62,27 +62,103 @@ function addProductGalleryListener(galleryClassArr, clickHandler) {
     */
     for (const galleryClass of galleryClassArr) {
         const gallery = document.getElementsByClassName(galleryClass)[0].children;
-        console.log(gallery)
         for (const thumbnailBox of gallery) {
             const thumbnail = thumbnailBox.children[0];
             thumbnail.addEventListener("click", clickHandler);
         }
     }
 }
+function setThumbnailMode (eventCaller, staticShowcase, lightBoxShowcase) {
+    /*
+    Sets the thumbnail active on or off.
+        :@param eventCaller: Object - HTML element that triggers the event.
+        :@param staticShowcase: Object - the static showcase element.
+        :@param lightBoxShowcase: Object - the lightbox showcase element.
+        :return undefined:
+    */
+    const currentThumbnail = eventCaller;
+    const currentThumbnailSrc = currentThumbnail.getAttribute("src");
+    const currentParentShowcase = eventCaller.parentElement.parentElement.parentElement;
+    // Gets the thumbnail that has the same source attribute as the event caller thumbnail 
+    // (can come from either the static showcase or lightbox showcase).
+    let oppositeShowcase;
+    if (currentParentShowcase === staticShowcase) {
+        oppositeShowcase = lightBoxShowcase;
+    } else {
+        oppositeShowcase = staticShowcase;
+    }
+    let oppositeThumbnail;
+    const oppositeThumnbnailArr = oppositeShowcase.getElementsByClassName("img-thumbnail");
+    for (const tempOppositeThumbnail of oppositeThumnbnailArr) {
+        const oppositeThumbnailSrc = tempOppositeThumbnail.getAttribute("src")
+        // compare img source attribute
+        if (currentThumbnailSrc === oppositeThumbnailSrc) {
+            oppositeThumbnail = tempOppositeThumbnail;
+        }
+    }
+    const previousActiveThumbnail = currentParentShowcase.getElementsByClassName("thumbnail-active")[0];
+    const previousOppositeActiveThumbnail = oppositeShowcase.getElementsByClassName("thumbnail-active")[0];
+    // Remove active state of previous active thumbnail for both static and lightbox
+    previousActiveThumbnail.classList.remove("thumbnail-active");
+    previousOppositeActiveThumbnail.classList.remove("thumbnail-active");
+    // Add active state for current thumbnail and opposite current thumbnail
+    const currentThumbnailParent = currentThumbnail.parentElement;
+    const oppositeThumbnailParent = oppositeThumbnail.parentElement;
+    currentThumbnailParent.classList.add("thumbnail-active");
+    oppositeThumbnailParent.classList.add("thumbnail-active");
+}
+function setHeightToDocumentHeight(targetElement) {
+    /*
+    Sets the targeted element height into documents offset height(px unit).
+        :@param targetSelector: Object - an HTML element object as target.
+        :return undefined:
+    */
+    const documentHeight = document.getElementsByTagName("html")[0].offsetHeight;
+    if (targetElement.style.height !== documentHeight) {
+        targetElement.style.height = `${documentHeight}px`;
+    }
+}
 function productGalleryHandler () {
-    console.log("change preview image please!");
+    /*
+    Handles the event when a thumbnail has been clicked.
+    */
+    const imgSource = this.getAttribute("src");
+    const regExpStartSlice = /-thumbnail/;
+    const startToSliceIdx = imgSource.search(regExpStartSlice);
+    const newPreviewSource = `${imgSource.slice(0, startToSliceIdx)}${imgSource.slice(startToSliceIdx + 1 + "thumbnail".length)}`;
+    const staticShowcase = document.getElementsByClassName("static-showcase")[0];
+    const lightBoxShowcase = document.getElementsByClassName("lightbox-showcase")[0];
+    const staticPreview = staticShowcase.getElementsByClassName("preview-img")[0];
+    setThumbnailMode(this, staticShowcase, lightBoxShowcase);
+    // Change static showcase preview and thumbnail state
+    staticPreview.setAttribute("src", newPreviewSource);
+    // Change lightbox showcase preview and thumbnail state
+    const lightBoxPreview = lightBoxShowcase.getElementsByClassName("preview-img")[0];
+    lightBoxPreview.setAttribute("src", newPreviewSource);
+    // Change lightbox height to document height
+    setHeightToDocumentHeight(lightBoxShowcase);
+    // Display lightbox
+    lightBoxShowcase.classList.remove("d-lg-none");
 }
 function addCloseLightBoxListener(containerClass, closeButtonClass, clickHandler) {
     /*
     Add event listeners for lightbox close button.
-        :@param containerClass: String - the class selector of the targeted element container.
         :@param closeButtonClass: String - the class selector of the close button element.
         :@param clickHandler: Function - the function be used as event handler.
         :return undefined:
     */
     const lightBoxContainer = document.getElementsByClassName(containerClass)[0];
     const closeLightBoxButton = lightBoxContainer.getElementsByClassName(closeButtonClass)[0];
+    lightBoxContainer.addEventListener("click", clickHandler);
     closeLightBoxButton.addEventListener("click", clickHandler);
+}
+function closeLightBoxHandler() {
+    /*
+    Closes the lightbox.
+        :return undefined:
+    */
+    const lightBox = document.getElementsByClassName("lightbox-showcase")[0];
+    lightBox.classList.add("d-lg-none");
 }
 function setDefaultPreviewSrc(previewImgClass, defaultPreviewSrc) {
     /*
@@ -105,4 +181,4 @@ function previewSlider(productPreviewSrcObj) {
 }
 export { previewSlider, addSliderButtonListener, setDefaultPreviewSrc,
     addCloseLightBoxListener, sliderButtonHandler, addProductGalleryListener,
-    productGalleryHandler }
+    productGalleryHandler, closeLightBoxHandler }
