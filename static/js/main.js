@@ -1,5 +1,6 @@
 import * as Slider from './preview-slider.js'
 import * as prodDataFetcher from './fetch-product.js'
+import { addToCart } from './add-to-cart.js';
 
 // Get test product
 const url = "./", testDirectory = "static/js/product.json";
@@ -19,3 +20,6 @@ prodDataPromise.then((getData) => {
     // Add event listener to preview product gallery thumbnails
     Slider.addProductGalleryListener(["static-prod-gallery", "lightbox-prod-gallery"], Slider.productGalleryHandler);
 });
+// Add event listener to add to cart button
+const orderButton = document.getElementsByClassName("cart-btn");
+orderButton.addEventListener("click", addToCart);

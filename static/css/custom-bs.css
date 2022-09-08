@@ -89,14 +89,14 @@ MAIN
 .order-quantity {
     font-size: 1.05rem;
 }
-.order-btn {
+.cart-btn {
     color: rgb(255, 255, 255);
     background-color: var(--primary-orange);
 }
-.order-btn svg {
+.cart-btn svg {
     transform: scale(0.8);
 }
-.order-btn path {
+.cart-btn path {
     fill: rgb(255, 255, 255);
 }
 /* product showcase */
