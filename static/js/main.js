@@ -21,5 +21,5 @@ prodDataPromise.then((getData) => {
     Slider.addProductGalleryListener(["static-prod-gallery", "lightbox-prod-gallery"], Slider.productGalleryHandler);
 });
 // Add event listener to add to cart button
-const orderButton = document.getElementsByClassName("cart-btn");
+const orderButton = document.getElementsByClassName("cart-btn")[0];
 orderButton.addEventListener("click", addToCart);
