@@ -33,6 +33,30 @@ function addToLocalStorage(storageKey, orderStr) {
         // Set item for empty storage key
         const orderStrArr = JSON.stringify([orderStr])
         localStorage.setItem(storageKey, orderStrArr)
+    } else {
+        const orderStrArr = localStorage.getItem(storageKey);
+        // Convert JSON string to object
+        const orderArr = JSON.parse(orderStrArr);
+        // Check for duplicate order
+        for (const idx of orderArr.keys()) {
+            // Update order quantity
+            const oldOrder = orderArr[idx]; 
+            const newOrder = JSON.parse(orderStr);
+            // Check if product is the same
+            if (oldOrder["prodName"] === newOrder["prodName"]) {
+                newOrder["orderQuantity"] += oldOrder["orderQuanity"];
+                localStorage.removeItem(storageKey); // remove old entry in local storage
+                orderArr.splice(idx, 1); // remove array entry
+                console.log("Cart order quantity updated!", orderStr);
+            }
+        }
+        // Add new cart order to array
+        // orderArr.push(orderStr);
+        // Convert order array back to JSON string format
+        const orderUpdatedArr = JSON.stringify(orderArr);  
+        // Update order in local storage
+        localStorage.setItem(storageKey, orderUpdatedArr);
+        // console.log(JSON.parse(localStorage.getItem(storageKey)));
     }
 }
 function addToCart() {
