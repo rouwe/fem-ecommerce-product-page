@@ -31,8 +31,8 @@ function addToLocalStorage(storageKey, orderStr) {
     */
     if (localStorage.getItem(storageKey) === null) {
         // Set item for empty storage key
-        const orderStrArr = JSON.stringify([orderStr])
-        localStorage.setItem(storageKey, orderStrArr)
+        const orderStrArr = JSON.stringify([orderStr]);
+        localStorage.setItem(storageKey, orderStrArr);
     } else {
         const orderStrArr = localStorage.getItem(storageKey);
         // Convert JSON string to object
@@ -40,23 +40,27 @@ function addToLocalStorage(storageKey, orderStr) {
         // Check for duplicate order
         for (const idx of orderArr.keys()) {
             // Update order quantity
-            const oldOrder = orderArr[idx]; 
+            const oldOrder = JSON.parse(orderArr[idx]); 
             const newOrder = JSON.parse(orderStr);
             // Check if product is the same
             if (oldOrder["prodName"] === newOrder["prodName"]) {
-                newOrder["orderQuantity"] += oldOrder["orderQuanity"];
-                localStorage.removeItem(storageKey); // remove old entry in local storage
-                orderArr.splice(idx, 1); // remove array entry
-                console.log("Cart order quantity updated!", orderStr);
+                newOrder["orderQuantity"] = Number(newOrder["orderQuantity"]) + Number(oldOrder["orderQuantity"]);
+                newOrder["orderQuantity"] = String(newOrder["orderQuantity"]);
+                // remove old entry in local storage
+                localStorage.removeItem(storageKey);
+                // remove and replace array entry
+                orderArr.splice(idx, 1, JSON.stringify(newOrder));
+            }
+            // New order
+            else {
+                // Add new cart order to array
+                orderArr.push(orderStr);
             }
         }
-        // Add new cart order to array
-        // orderArr.push(orderStr);
         // Convert order array back to JSON string format
         const orderUpdatedArr = JSON.stringify(orderArr);  
         // Update order in local storage
         localStorage.setItem(storageKey, orderUpdatedArr);
-        // console.log(JSON.parse(localStorage.getItem(storageKey)));
     }
 }
 function addToCart() {
@@ -65,6 +69,6 @@ function addToCart() {
     */
     const storageCartKey = "storageCart";
     const orderString = prepareToAdd();
-    addToLocalStorage(storageCartKey, orderString)
+    addToLocalStorage(storageCartKey, orderString);
 }
 export { addToCart };
