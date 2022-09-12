@@ -20,6 +20,25 @@ prodDataPromise.then((getData) => {
     // Add event listener to preview product gallery thumbnails
     Slider.addProductGalleryListener(["static-prod-gallery", "lightbox-prod-gallery"], Slider.productGalleryHandler);
 });
+// Add event listener to order quanity increase and decrease button
+const decreaseOrder = document.getElementsByClassName("quantity-reduce")[0];
+const increaseOrder = document.getElementsByClassName("quantity-add")[0];
+// Decrease order quantity event
+decreaseOrder.addEventListener("click", (e) => {
+    const orderQuantityElement = document.getElementsByClassName("order-quantity")[0];
+    const orderQuantity = Number(orderQuantityElement.innerHTML);
+    if (orderQuantity > 0) {
+        const newQuantity = orderQuantity - 1;
+        orderQuantityElement.innerHTML = newQuantity;
+    }
+})
+// Increase order quantity event
+increaseOrder.addEventListener("click", (e) => {
+    const orderQuantityElement = document.getElementsByClassName("order-quantity")[0];
+    const orderQuantity = Number(orderQuantityElement.innerHTML);
+    const newQuantity = orderQuantity + 1;
+    orderQuantityElement.innerHTML = newQuantity;
+})
 // Add event listener to add to cart button
 const orderButton = document.getElementsByClassName("cart-btn")[0];
 orderButton.addEventListener("click", addToCart);
