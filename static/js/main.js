@@ -1,10 +1,10 @@
 import * as Slider from './preview-slider.js'
-import * as prodDataFetcher from './fetch-product.js'
-import { addToCart } from './add-to-cart.js';
+import * as ProdDataFetcher from './fetch-product.js'
+import * as Cart from './add-to-cart.js';
 
 // Get test product
 const url = "./", testDirectory = "static/js/product.json";
-const prodDataPromise = prodDataFetcher.getProductObj(url, testDirectory);
+const prodDataPromise = ProdDataFetcher.getProductObj(url, testDirectory);
 prodDataPromise.then((getData) => {
     // 
     const {productSeller, productName, productDescription, priceInfo,
@@ -39,6 +39,8 @@ increaseOrder.addEventListener("click", (e) => {
     const newQuantity = orderQuantity + 1;
     orderQuantityElement.innerHTML = newQuantity;
 })
+// Add event listener for checking cart storage
+Cart.addCheckCartListener(Cart.checkCartHandler);
 // Add event listener to add to cart button
 const orderButton = document.getElementsByClassName("cart-btn")[0];
-orderButton.addEventListener("click", addToCart);
+orderButton.addEventListener("click", Cart.addToCart);

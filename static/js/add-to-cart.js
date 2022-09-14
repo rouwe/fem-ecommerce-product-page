@@ -25,7 +25,7 @@ function prepareToAdd() {
 function addToLocalStorage(storageKey, orderStr) {
     /*
     Add order to local storage.
-        :@param storageKey: String - the local storage key to be . 
+        :@param storageKey: String - the local storage key to be. 
         :@param orderStr: String - JSON string contains the data of the user order.
         :return undefined:
     */
@@ -63,6 +63,59 @@ function addToLocalStorage(storageKey, orderStr) {
         localStorage.setItem(storageKey, orderUpdatedArr);
     }
 }
+function checkCart(storageCartKey="storageCart") {
+    /*
+    Checks if the cart has entries.
+        :@param storageCartKey: String - a key to access the cart storage.
+        :return Array: returns a Boolean and a json string.
+    */
+    const cartContent = localStorage.getItem(storageCartKey);
+    let hasEntries = false;
+    if (cartContent) {
+        hasEntries = true;
+    }
+    return [hasEntries, cartContent];
+}
+function toggleCartBadge(targetParent) {
+    /*
+    Toggle the header cart badge.
+        :@param targetParent: Object - parent object of target badge element.
+        :return undefined:
+    */
+    console.log(targetParent)
+    let badge = targetParent.getElementsByClassName('badge')[0];
+    badge.classList.toggle('d-none');
+}
+function updateCartItemCount(targetParent, cartContent) {
+    /*
+    Update the cart item count.
+        :@param targetParent: Object - parent object of target badge element.
+        :@param cartContent: JSON - contains the cart data.
+    */
+}
+function checkCartHandler() {
+    /*
+    Event Handler for checking the cart storage entries.
+        :return undefined:
+    */
+    // Check storage
+    const [hasEntries, cartContent] = checkCart("storageCart");
+    if (hasEntries) {
+        // Toggle badge display
+        const headerCartBtn = document.getElementsByClassName('header-cart-btn')[0];
+        toggleCartBadge(headerCartBtn);
+        updateCartItemCount(headerCartBtn, cartContent);
+    }
+}
+function addCheckCartListener(loadHandler) {
+    /*
+    Add an event listener to the window object that checks for cart entries.
+    :return undefined:
+    */
+    const target = document;
+    console.log(target)
+    target.addEventListener('DOMContentLoaded', loadHandler);
+}
 function addToCart() {
     /*
     Add product to cart.
@@ -71,4 +124,4 @@ function addToCart() {
     const orderString = prepareToAdd();
     addToLocalStorage(storageCartKey, orderString);
 }
-export { addToCart };
+export { addToCart, addCheckCartListener, checkCartHandler };

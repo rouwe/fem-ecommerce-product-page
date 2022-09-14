@@ -161,6 +161,13 @@ MAIN
         margin: initial;
     }
     /* 
+    HEADER
+    */
+    .badge-custom {
+        left: 0rem;    
+        transform: scale(0.8) translate(3rem, -0.3rem);
+    }
+    /* 
     MAIN
     */
     /* Product container */
