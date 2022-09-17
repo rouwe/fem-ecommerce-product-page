@@ -82,7 +82,6 @@ function toggleCartBadge(targetParent) {
         :@param targetParent: Object - parent object of target badge element.
         :return undefined:
     */
-    console.log(targetParent)
     let badge = targetParent.getElementsByClassName('badge')[0];
     badge.classList.toggle('d-none');
 }
@@ -92,19 +91,97 @@ function updateCartItemCount(targetParent, cartContent) {
         :@param targetParent: Object - parent object of target badge element.
         :@param cartContent: JSON - contains the cart data.
     */
+    const badge = targetParent.getElementsByClassName('badge')[0];
+    const cartDataArr = JSON.parse(cartContent);
+    const cartCount = cartDataArr.length;
+    badge.innerHTML = cartCount;
+}
+function createCartItem(THUMBNAIL_SRC, prodName, discountedPrice, orderQuantity) {
+    /*
+    Html element template for a cart item.
+        :@param THUMBNAIL_SRC: String - file path of product thumbnail.
+        :@param prodName: String - product name.
+        :@param discountedPrice: String - current price.
+        :@param orderQuantity: String - order quantity.
+        :return cartItem: Object - cart item element created.
+    */
+    // Cart Item
+    const cartItemBox =  document.createElement("div");
+    cartItemBox.setAttribute("class", "flex-row justify-content-stretch cart-item-box");
+    // Thumbnail
+    const cartItemThumbnail = document.createElement("img");
+    cartItemThumbnail.setAttribute("src", THUMBNAIL_SRC);
+    cartItemThumbnail.setAttribute("class", "img-fluid");
+    cartItemBox.appendChild(cartItemThumbnail);
+    // Details Box
+    const orderDetailsBox = document.createElement("div");
+    orderDetailsBox.setAttribute("class", "order-details-box");
+    cartItemBox.appendChild(orderDetailsBox);
+    // Product Name
+    const prodNameElement = document.createElement("p");
+    prodNameElement.innerHTML = prodName;
+    prodNameElement.setAttribute("class", "cart-item-name");
+    orderDetailsBox.appendChild(prodNameElement);
+    // Price Details
+    const priceDetailsElement = document.createElement("p");
+    priceDetailsElement.setAttribute("class", "price-details");
+    orderDetailsBox.appendChild(priceDetailsElement);
+    const priceDetailsExpressionElement = document.createElement("span");
+    priceDetailsExpressionElement.innerHTML = `${discountedPrice}x${orderQuantity}`;
+    priceDetailsElement.appendChild(priceDetailsExpressionElement);
+    const priceDetailsTotalElement = document.createElement("span");
+    priceDetailsTotalElement.innerHTML = `${discountedPrice * orderQuantity}`;
+    priceDetailsElement.appendChild(priceDetailsTotalElement);
+    
+    // Delete Cart item button
+    const deleteButton = document.createElement("button");
+    deleteButton.setAttribute("class", "btn delete-item-btn");
+    // Delete Icon
+    const deleteIconSvg = document.createElement("svg");
+
+
+    
+    deleteButton.append(deleteIconSvg)
+    // Cart Item Details
+    return cartItemBox;
+}
+function appendCartItems(targetParent, cartContent) {
+    /*
+    Append all cart item to the parent element.
+        :@param targetParent: Object - element where the cart items will be appended.
+        :@param cartItem: Object - a json string that contains the cart items data.
+        :return undefined:
+    */
+    
+    const cartItemsArr = JSON.parse(cartContent);
+    for (let cartItemStr of cartItemsArr) {
+        const { prodName, discountedPrice , orderQuantity} = JSON.parse(cartItemStr);
+        // Process discounted price string
+        const regex = /[0-9]+.\d{2}/g;
+        const numDiscountedPrice = Number(discountedPrice.match(regex)[0]);
+        const numOrderQuantity = Number(orderQuantity);
+        console.log(numDiscountedPrice)
+        const THUMBNAIL_SRC = `./images/image-product-1-thumbnail.jpg`;
+        targetParent.appendChild(createCartItem(THUMBNAIL_SRC, prodName, numDiscountedPrice, numOrderQuantity));
+    }
 }
 function checkCartHandler() {
     /*
-    Event Handler for checking the cart storage entries.
+    Event Handler for checking the cart storage entries and adding cart items.
         :return undefined:
     */
     // Check storage
     const [hasEntries, cartContent] = checkCart("storageCart");
+    console.log(JSON.parse(cartContent))
     if (hasEntries) {
         // Toggle badge display
         const headerCartBtn = document.getElementsByClassName('header-cart-btn')[0];
         toggleCartBadge(headerCartBtn);
+        // Update the badge number
         updateCartItemCount(headerCartBtn, cartContent);
+        // Generate cart items
+        const cartItemsParent = document.getElementsByClassName("cart-items-list")[0];
+        appendCartItems(cartItemsParent, cartContent);
     }
 }
 function addCheckCartListener(loadHandler) {
@@ -113,7 +190,6 @@ function addCheckCartListener(loadHandler) {
     :return undefined:
     */
     const target = document;
-    console.log(target)
     target.addEventListener('DOMContentLoaded', loadHandler);
 }
 function addToCart() {
