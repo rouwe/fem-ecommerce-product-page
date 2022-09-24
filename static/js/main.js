@@ -1,10 +1,10 @@
 import * as Slider from './preview-slider.js'
-import * as prodDataFetcher from './fetch-product.js'
-import { addToCart } from './add-to-cart.js';
+import * as ProdDataFetcher from './fetch-product.js'
+import * as Cart from './add-to-cart.js';
 
 // Get test product
 const url = "./", testDirectory = "static/js/product.json";
-const prodDataPromise = prodDataFetcher.getProductObj(url, testDirectory);
+const prodDataPromise = ProdDataFetcher.getProductObj(url, testDirectory);
 prodDataPromise.then((getData) => {
     // 
     const {productSeller, productName, productDescription, priceInfo,
@@ -20,6 +20,29 @@ prodDataPromise.then((getData) => {
     // Add event listener to preview product gallery thumbnails
     Slider.addProductGalleryListener(["static-prod-gallery", "lightbox-prod-gallery"], Slider.productGalleryHandler);
 });
+// Add event listener to order quanity increase and decrease button
+const decreaseOrder = document.getElementsByClassName("quantity-reduce")[0];
+const increaseOrder = document.getElementsByClassName("quantity-add")[0];
+// Decrease order quantity event
+decreaseOrder.addEventListener("click", (e) => {
+    const orderQuantityElement = document.getElementsByClassName("order-quantity")[0];
+    const orderQuantity = Number(orderQuantityElement.innerHTML);
+    if (orderQuantity > 0) {
+        const newQuantity = orderQuantity - 1;
+        orderQuantityElement.innerHTML = newQuantity;
+    }
+})
+// Increase order quantity event
+increaseOrder.addEventListener("click", (e) => {
+    const orderQuantityElement = document.getElementsByClassName("order-quantity")[0];
+    const orderQuantity = Number(orderQuantityElement.innerHTML);
+    const newQuantity = orderQuantity + 1;
+    orderQuantityElement.innerHTML = newQuantity;
+})
+// Add event listener for checking cart storage
+Cart.addCheckCartListener(Cart.checkCartHandler);
 // Add event listener to add to cart button
 const orderButton = document.getElementsByClassName("cart-btn")[0];
-orderButton.addEventListener("click", addToCart);
+orderButton.addEventListener("click", Cart.addToCart);
+// Add event listener for displaying cart box when clicking header cart icon
+Cart.addToggleCartBoxListener(Cart.toggleCartBoxHandler);
