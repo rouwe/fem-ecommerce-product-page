@@ -82,8 +82,23 @@ function toggleCartBadge(targetParent) {
         :@param targetParent: Object - parent object of target badge element.
         :return undefined:
     */
-    let badge = targetParent.getElementsByClassName('badge')[0];
+    const badge = targetParent.getElementsByClassName('badge')[0];
     badge.classList.toggle('d-none');
+}
+function addToggleCartBoxListener(clickHandler) {
+    /*
+    Add listener that displays the cart items list when clicking header cart icon
+        :return undefined:
+    */
+    const headerCartIcon = document.getElementsByClassName('header-cart-btn')[0];
+    headerCartIcon.addEventListener('click', clickHandler);
+}
+function toggleCartBoxHandler() {
+    /*
+    Toggle the cart items list
+    */
+    const cartItemsList = document.getElementsByClassName('cart-box')[0];;
+    cartItemsList.classList.toggle('d-none');
 }
 function updateCartItemCount(targetParent, cartContent) {
     /*
@@ -105,45 +120,55 @@ function createCartItem(THUMBNAIL_SRC, prodName, discountedPrice, orderQuantity)
         :@param orderQuantity: String - order quantity.
         :return cartItem: Object - cart item element created.
     */
-    // Cart Item
-    const cartItemBox =  document.createElement("div");
-    cartItemBox.setAttribute("class", "flex-row justify-content-stretch cart-item-box");
+    // Cart Items Details Box and Wrapper
+    const cartItemsDetailsBox = document.createElement('div');
+    cartItemsDetailsBox.setAttribute('class', 'row cart-item-details-box');
+    // Cart Items Details
     // Thumbnail
-    const cartItemThumbnail = document.createElement("img");
-    cartItemThumbnail.setAttribute("src", THUMBNAIL_SRC);
-    cartItemThumbnail.setAttribute("class", "img-fluid");
-    cartItemBox.appendChild(cartItemThumbnail);
+    const cartItemsThumbnailBox = document.createElement('div');
+    cartItemsThumbnailBox.setAttribute('class', 'col-4 thumbnail-box');
+    const cartItemsThumbnail = document.createElement('img');
+    cartItemsThumbnail.setAttribute('class', 'img-fluid');
+    cartItemsThumbnail.setAttribute('src', THUMBNAIL_SRC);
+    cartItemsThumbnailBox.appendChild(cartItemsThumbnail);
+    cartItemsDetailsBox.appendChild(cartItemsThumbnailBox);
     // Details Box
-    const orderDetailsBox = document.createElement("div");
-    orderDetailsBox.setAttribute("class", "order-details-box");
-    cartItemBox.appendChild(orderDetailsBox);
+    const cartItemsDetailsTextBox = document.createElement('div');
+    cartItemsDetailsTextBox.setAttribute('class', 'col-8 details-box');
+    cartItemsDetailsBox.appendChild(cartItemsDetailsTextBox);
+    // Details Text Wrapper
+    const detailsTextWrapper = document.createElement('div');
+    detailsTextWrapper.setAttribute('class', 'details-text-wrapper');
+    cartItemsDetailsTextBox.appendChild(detailsTextWrapper);
     // Product Name
-    const prodNameElement = document.createElement("p");
-    prodNameElement.innerHTML = prodName;
-    prodNameElement.setAttribute("class", "cart-item-name");
-    orderDetailsBox.appendChild(prodNameElement);
-    // Price Details
-    const priceDetailsElement = document.createElement("p");
-    priceDetailsElement.setAttribute("class", "price-details");
-    orderDetailsBox.appendChild(priceDetailsElement);
-    const priceDetailsExpressionElement = document.createElement("span");
-    priceDetailsExpressionElement.innerHTML = `${discountedPrice}x${orderQuantity}`;
-    priceDetailsElement.appendChild(priceDetailsExpressionElement);
-    const priceDetailsTotalElement = document.createElement("span");
-    priceDetailsTotalElement.innerHTML = `${discountedPrice * orderQuantity}`;
-    priceDetailsElement.appendChild(priceDetailsTotalElement);
-    
-    // Delete Cart item button
-    const deleteButton = document.createElement("button");
-    deleteButton.setAttribute("class", "btn delete-item-btn");
-    // Delete Icon
-    const deleteIconSvg = document.createElement("svg");
+    const cartItemsDetailsProductNameBox = document.createElement('div');
+    cartItemsDetailsProductNameBox.setAttribute('class', 'cart-item-product-name-box');
+    const productNameText = document.createElement('p');
+    productNameText.innerHTML = prodName;
+    cartItemsDetailsProductNameBox.appendChild(productNameText);
+    detailsTextWrapper.appendChild(cartItemsDetailsProductNameBox);
+    // Price Info Box
+    const priceInfoBox = document.createElement('div');
+    priceInfoBox.setAttribute('class', 'price-info-box');
+    detailsTextWrapper.appendChild(priceInfoBox);
+    const priceInfo = document.createElement('span');
+    priceInfo.innerHTML = `$${discountedPrice}.00 x ${orderQuantity}`;
+    priceInfo.setAttribute('class', 'cart-item-price-info');
+    priceInfoBox.appendChild(priceInfo);
+    const total = document.createElement('span');
+    total.setAttribute('class', 'cart-item-total')
+    total.innerHTML = `$${discountedPrice * orderQuantity}.00`; 
+    priceInfoBox.appendChild(total);
+    // Delete Cart Item Box
+    const deleteCartItemBox = document.createElement('div');
+    deleteCartItemBox.setAttribute('class', 'delete-cart-item-box')
+    const deleteCartIcon = document.createElement('img');
+    deleteCartIcon.setAttribute('src', './images/icon-delete.svg');
+    deleteCartIcon.setAttribute('alt', 'Delete cart item icon')
+    deleteCartItemBox.appendChild(deleteCartIcon);
+    cartItemsDetailsTextBox.appendChild(deleteCartItemBox);
 
-
-    
-    deleteButton.append(deleteIconSvg)
-    // Cart Item Details
-    return cartItemBox;
+    return cartItemsDetailsBox;
 }
 function appendCartItems(targetParent, cartContent) {
     /*
@@ -200,4 +225,5 @@ function addToCart() {
     const orderString = prepareToAdd();
     addToLocalStorage(storageCartKey, orderString);
 }
-export { addToCart, addCheckCartListener, checkCartHandler };
+export { addToCart, addCheckCartListener, checkCartHandler,
+    addToggleCartBoxListener, toggleCartBoxHandler };

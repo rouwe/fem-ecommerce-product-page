@@ -44,3 +44,5 @@ Cart.addCheckCartListener(Cart.checkCartHandler);
 // Add event listener to add to cart button
 const orderButton = document.getElementsByClassName("cart-btn")[0];
 orderButton.addEventListener("click", Cart.addToCart);
+// Add event listener for displaying cart box when clicking header cart icon
+Cart.addToggleCartBoxListener(Cart.toggleCartBoxHandler);
