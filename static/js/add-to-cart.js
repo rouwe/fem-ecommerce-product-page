@@ -65,14 +65,18 @@ function addToLocalStorage(storageKey, orderStr) {
         localStorage.setItem(storageKey, orderUpdatedArr);
     }
 }
-function toggleCartBadge(targetParent) {
+function toggleCartBadge(targetParent, hasEntries, cartContent) {
     /*
     Toggle the header cart badge.
         :@param targetParent: Object - parent object of target badge element.
+        :@param hasEntries: Boolean - whether the cart has records.
+        :@param cartContent: JSON - cart records in JSON format.
         :return undefined:
     */
-    const badge = targetParent.getElementsByClassName('badge')[0];
-    badge.classList.toggle('d-none');
+    if (hasEntries && cartContent !== 'undefined') {
+        const badge = targetParent.getElementsByClassName('badge')[0];
+        badge.classList.toggle('d-none');
+    }
 }
 function addToggleCartBoxListener(clickHandler) {
     /*
@@ -194,7 +198,7 @@ function checkCartHandler() {
     if (hasEntries) {
         // Toggle badge display
         const headerCartBtn = document.getElementsByClassName('header-cart-btn')[0];
-        toggleCartBadge(headerCartBtn);
+        toggleCartBadge(headerCartBtn, hasEntries, cartContent);
         // Update the badge number
         updateCartItemCount(headerCartBtn, hasEntries, cartContent);
         // Generate cart items
