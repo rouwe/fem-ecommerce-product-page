@@ -128,7 +128,7 @@ function createCartItem(THUMBNAIL_SRC, prodName, discountedPrice, orderQuantity)
     const cartItemsThumbnailBox = document.createElement('div');
     cartItemsThumbnailBox.setAttribute('class', 'col-4 thumbnail-box');
     const cartItemsThumbnail = document.createElement('img');
-    cartItemsThumbnail.setAttribute('class', 'img-fluid');
+    cartItemsThumbnail.setAttribute('class', 'img-fluid rounded');
     cartItemsThumbnail.setAttribute('src', THUMBNAIL_SRC);
     cartItemsThumbnailBox.appendChild(cartItemsThumbnail);
     cartItemsDetailsBox.appendChild(cartItemsThumbnailBox);
