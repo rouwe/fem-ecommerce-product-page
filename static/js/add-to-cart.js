@@ -174,7 +174,6 @@ function appendCartItems(targetParent, hasEntries, cartContent) {
         :return undefined:
     */
     
-   console.log(cartContent)
    if (hasEntries && cartContent !== 'undefined') {
         const cartItemsArr = JSON.parse(cartContent);
         for (let cartItemStr of cartItemsArr) {
@@ -199,6 +198,8 @@ function checkCartHandler() {
         // Toggle badge display
         const headerCartBtn = document.getElementsByClassName('header-cart-btn')[0];
         toggleCartBadge(headerCartBtn, hasEntries, cartContent);
+        // Toggle empty cart alert.
+        Util.toggleCartAlert('alert-cart-empty', hasEntries, cartContent)
         // Update the badge number
         updateCartItemCount(headerCartBtn, hasEntries, cartContent);
         // Generate cart items

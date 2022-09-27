@@ -18,7 +18,32 @@ function updateCart(storageCartKey, content) {
         :@param content: JSON - updated entries content.
     */
     localStorage.setItem(storageCartKey, content);
-    console.log(localStorage.getItem(storageCartKey))
-    console.log('Cart Updated')
 }
-export { checkCart, updateCart };
+function displayCheckoutBtn(targetClass='checkout-btn', action) {
+    /*
+    Display cart checkout button depending on action.
+        :@param targetClass: String - button element to toggle.
+        :@param action: Boolean - display if true else hide.
+        :return undefined: 
+    */
+
+    const checkoutBtn = document.getElementsByClassName(targetClass)[0];
+    checkoutBtn.classList.toggle('d-none');
+}
+function toggleCartAlert(targetClass='alert-cart-empty', hasEntries, cartContent) {
+    /*
+    Toggle empty cart alert.
+        :@param targetClass: String - span element to toggle.
+        :@param hasEntries: Boolean - whether the cart has records.
+        :@param cartContent: JSON - cart records in JSON format.
+        :return undefined:
+    */
+   console.log(hasEntries, cartContent)
+    const emptyCartTextElement = document.getElementsByClassName(targetClass)[0];
+    if (hasEntries && cartContent === 'undefined') {
+        emptyCartTextElement.classList.toggle('d-none');
+        // Toggle checkout button
+        displayCheckoutBtn('checkout-btn');
+    }
+}
+export { checkCart, updateCart, toggleCartAlert };
