@@ -11,6 +11,13 @@ Header
     padding-bottom: 0.75rem;
     background-color: rgb(255, 255, 255);
 }
+.navbar {
+    flex-wrap: nowrap;
+}
+.nav-link {
+    position: relative;
+    font-weight: 500;
+}
 /* Menu toggler */
 .mobile-menu {
     transform: translateY(0.05rem);
@@ -46,18 +53,47 @@ Header
 }
 .badge-custom {
     left: 0.4rem;    
-    transform: scale(0.8) translateY(-0.3rem);
+    transform: scale(0.6) translate(1.5rem, -0.3rem);
+}
+.profile-avatar {
+    max-width: 2.5rem;
 }
 /* Cart Items List */
 .cart-box {
-    width: 95vw;
-    top: 4.5rem;
-    right: 20%;
     background-color:rgb(255, 255, 255);
+    box-shadow: 0px 1px 10px 5px hsla(0, 0%, 25%, 0.1);
+    height: fit-content;
+    justify-content: space-between;
+    min-width: calc(99vmin - 1.5rem);
+    min-height: 60vmin;
+    max-height: 60vmax;
+    right: 1.5rem;
+    top: 4.5rem;
+}
+.cart-item-header {
+    border-bottom: 1px solid hsla(0, 0%, 25%, 0.15);
+    padding: 1rem 0;
+    width: 100%;
 }
 .cart-item-header h2 {
     font-size: 1rem;
     font-weight: 400;
+    margin-bottom: 0;
+    padding-left: 1.5rem;
+}
+.cart-items-list,
+.cart-checkout {
+    padding: 0 1.5rem;
+}
+.cart-items-list {
+    padding: 1rem 1.5rem;
+}
+.alert-cart-empty {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-align: center;
+    opacity: 0.65;
 }
 .cart-item-details-box {
     align-items: center;
@@ -72,10 +108,22 @@ Header
     flex-direction: column;
     row-gap: 0.5rem;
 }
+.cart-item-total {
+    font-weight: 700;
+    padding-left: 0.5rem;
+}
+.delete-cart-item-box  {
+    cursor: pointer;
+    display: block;
+}
+.cart-checkout {
+    flex: none;
+    padding-bottom: 1.5rem;
+}
 .checkout-btn {
+    font-size: 0.9rem;
     width: 100%;
-    margin: 1rem 0;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     color: rgb(255, 237, 224);
     background-color: var(--primary-orange);
 }
@@ -134,15 +182,34 @@ MAIN
 .order-quantity {
     font-size: 1.05rem;
 }
-.cart-btn {
+.quantity-add,
+.quantity-reduce {
+    transition: all 50ms ease-out 0s;
+    border: none;
+}
+.quantity-add:hover,
+.quantity-reduce:hover {
+    opacity: 0.55;
+}
+.quantity-add:active,
+.quantity-reduce:active {
+    transform: scale(0.9);
+}
+.product-cart-btn {
     color: rgb(255, 255, 255);
     background-color: var(--primary-orange);
+    transition: all 300ms ease-out 0s;
 }
-.cart-btn svg {
+.product-cart-btn svg {
     transform: scale(0.8);
 }
-.cart-btn path {
+.product-cart-btn path {
     fill: rgb(255, 255, 255);
+}
+.product-cart-btn:hover {
+    background-color: var(--primary-orange);
+    color:rgb(255, 255, 255);
+    opacity: 0.55;
 }
 /* product showcase */
 .prod-preview-box {
@@ -161,6 +228,7 @@ MAIN
     cursor: pointer;
     top: calc(50% - 2.3rem);
     background-color: rgb(255, 255, 255);
+    transition: all 50ms ease-out 0s;
     transform: scale(1.1);
 }
 .prev-btn svg,
@@ -178,6 +246,25 @@ MAIN
 .next-btn {
     right: 1.1rem;
 }
+.prev-btn:hover,
+.next-btn:hover,
+.prev-btn:focus,
+.next-btn:focus {
+    background-color: rgb(255, 255, 255);
+}
+.prev-btn:hover path,
+.next-btn:hover path {
+    stroke: var(--primary-orange);
+}
+.prev-btn:active,
+.next-btn:active {
+    background-color: rgb(255, 255, 255);
+    transform: scale(0.95);
+}
+.prev-btn:active path,
+.next-btn:active path {
+    stroke: var(--primary-orange);
+}
 .static-prod-gallery,
 .lightbox-prod-gallery {
     column-gap: 2rem;
@@ -190,8 +277,13 @@ MAIN
     padding: 0 4rem!important;
 }
 .img-thumbnail {
-    cursor: pointer;
     border: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 300ms ease-out 0s;
+}
+.img-thumbnail:hover {
+    opacity: 0.7;
 }
 /* @media (min-width: 576px) {
   }
@@ -208,9 +300,67 @@ MAIN
     /* 
     HEADER
     */
+    .nav-link {
+        font-weight: 400;
+    }
+    .nav-link:hover {
+        font-weight: 500;
+    }
+    .nav-link:link::before {
+        content: '';
+        transition: all 250ms ease-in-out 50ms;   
+        opacity: 0.75;
+    }
+    .nav-link:visited::before {
+        font-weight: 500;
+        opacity: 0.5;
+    }
+    .nav-link:hover::before {
+        border-bottom: 0.3rem solid var(--primary-orange);
+        border-radius: 0.1rem;
+        bottom: -100%;
+        height: 250%;
+        left: 0.5rem;
+        position: absolute;
+        opacity: 1;
+        width: calc(100% - 1rem);
+    }
+    .nav-link:focus {
+        color: var(--primary-orange);
+    }
+    .nav-link:active {
+        color: var(--primary-orange);
+        font-weight: 700;
+        opacity: 0.75;
+    }
     .badge-custom {
-        left: 0rem;    
-        transform: scale(0.8) translate(3rem, -0.3rem);
+        right: 0;    
+        transform: scale(0.6) translate(3rem, -0.3rem);
+        width: fit-content;
+    }
+    .cart-box {
+        min-width: calc(50vmin - 1.5rem);
+        min-height: 35vmin;
+        max-height: 400vmin;
+    }
+    .header-cart-btn {
+        transition: all 300ms ease-out 0s;
+    }
+    .header-cart-btn:hover {
+        transform: scale(0.95);
+    }
+    .header-cart-btn:hover path {
+        fill:rgb(255, 125, 26);
+    }
+    .profile-avatar {
+        cursor: pointer;
+        border-radius: 50%;
+        max-width: 3rem;
+        transition: all 300ms ease-out 0s;
+    }
+    .profile-avatar:hover {
+        border: 0.2rem solid var(--primary-orange);
+        transform: scale(0.95);
     }
     /* 
     MAIN
@@ -257,6 +407,10 @@ MAIN
         border-radius: 1rem;
         background-color: rgba(255, 255, 255, 0.75);
     }
+    .cart-item-product-name-box p {
+        text-overflow: initial;
+        white-space: normal;
+    }
     /* product showcase */
     /* Lightbox */
     .lightbox-showcase {
@@ -284,8 +438,18 @@ MAIN
         height: auto;
         border-radius: 3%;
     }
+    .close-lightbox-btn {
+        transition: all 300ms ease-out 0s;
+        transform: scale(1.2);
+    }
     .close-lightbox-btn path {
         fill: white;
+    }
+    .close-lightbox-btn:hover path{
+        fill: var(--primary-orange);
+    }
+    .close-lightbox-btn:active {
+        transform: scale(0.95);
     }
     .prev-btn,
     .next-btn {

@@ -1,6 +1,7 @@
-import * as Slider from './preview-slider.js'
-import * as ProdDataFetcher from './fetch-product.js'
+import * as Slider from './preview-slider.js';
+import * as ProdDataFetcher from './fetch-product.js';
 import * as Cart from './add-to-cart.js';
+import * as DeleteCart from './delete-cart.js';
 
 // Get test product
 const url = "./", testDirectory = "static/js/product.json";
@@ -42,7 +43,9 @@ increaseOrder.addEventListener("click", (e) => {
 // Add event listener for checking cart storage
 Cart.addCheckCartListener(Cart.checkCartHandler);
 // Add event listener to add to cart button
-const orderButton = document.getElementsByClassName("cart-btn")[0];
+const orderButton = document.getElementsByClassName("product-cart-btn")[0];
 orderButton.addEventListener("click", Cart.addToCart);
 // Add event listener for displaying cart box when clicking header cart icon
 Cart.addToggleCartBoxListener(Cart.toggleCartBoxHandler);
+// Delete cart item listener
+DeleteCart.deleteCartItemListener('delete-cart-item-box', DeleteCart.deleteCartItemHandler);

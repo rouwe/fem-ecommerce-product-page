@@ -1,3 +1,4 @@
+import * as Util from './util.js';
 function prepareToAdd() {
     /*
     Prepare all the neccesary data for adding to cart.
@@ -29,7 +30,8 @@ function addToLocalStorage(storageKey, orderStr) {
         :@param orderStr: String - JSON string contains the data of the user order.
         :return undefined:
     */
-    if (localStorage.getItem(storageKey) === null) {
+   const storage = localStorage.getItem(storageKey);
+    if (storage === null || storage === 'undefined') {
         // Set item for empty storage key
         const orderStrArr = JSON.stringify([orderStr]);
         localStorage.setItem(storageKey, orderStrArr);
@@ -63,27 +65,18 @@ function addToLocalStorage(storageKey, orderStr) {
         localStorage.setItem(storageKey, orderUpdatedArr);
     }
 }
-function checkCart(storageCartKey="storageCart") {
-    /*
-    Checks if the cart has entries.
-        :@param storageCartKey: String - a key to access the cart storage.
-        :return Array: returns a Boolean and a json string.
-    */
-    const cartContent = localStorage.getItem(storageCartKey);
-    let hasEntries = false;
-    if (cartContent) {
-        hasEntries = true;
-    }
-    return [hasEntries, cartContent];
-}
-function toggleCartBadge(targetParent) {
+function toggleCartBadge(targetParent, hasEntries, cartContent) {
     /*
     Toggle the header cart badge.
         :@param targetParent: Object - parent object of target badge element.
+        :@param hasEntries: Boolean - whether the cart has records.
+        :@param cartContent: JSON - cart records in JSON format.
         :return undefined:
     */
-    const badge = targetParent.getElementsByClassName('badge')[0];
-    badge.classList.toggle('d-none');
+    if (hasEntries && cartContent !== 'undefined') {
+        const badge = targetParent.getElementsByClassName('badge')[0];
+        badge.classList.toggle('d-none');
+    }
 }
 function addToggleCartBoxListener(clickHandler) {
     /*
@@ -100,16 +93,19 @@ function toggleCartBoxHandler() {
     const cartItemsList = document.getElementsByClassName('cart-box')[0];;
     cartItemsList.classList.toggle('d-none');
 }
-function updateCartItemCount(targetParent, cartContent) {
+function updateCartItemCount(targetParent, hasEntries, cartContent) {
     /*
     Update the cart item count.
         :@param targetParent: Object - parent object of target badge element.
+        :@param hasEntries: Boolean - can be true or false.
         :@param cartContent: JSON - contains the cart data.
     */
-    const badge = targetParent.getElementsByClassName('badge')[0];
-    const cartDataArr = JSON.parse(cartContent);
-    const cartCount = cartDataArr.length;
-    badge.innerHTML = cartCount;
+    if (hasEntries && cartContent !== 'undefined') {
+        const badge = targetParent.getElementsByClassName('badge')[0];
+        const cartDataArr = JSON.parse(cartContent);
+        const cartCount = cartDataArr.length;
+        badge.innerHTML = cartCount;
+    }
 }
 function createCartItem(THUMBNAIL_SRC, prodName, discountedPrice, orderQuantity) {
     /*
@@ -128,7 +124,7 @@ function createCartItem(THUMBNAIL_SRC, prodName, discountedPrice, orderQuantity)
     const cartItemsThumbnailBox = document.createElement('div');
     cartItemsThumbnailBox.setAttribute('class', 'col-4 thumbnail-box');
     const cartItemsThumbnail = document.createElement('img');
-    cartItemsThumbnail.setAttribute('class', 'img-fluid');
+    cartItemsThumbnail.setAttribute('class', 'img-fluid rounded');
     cartItemsThumbnail.setAttribute('src', THUMBNAIL_SRC);
     cartItemsThumbnailBox.appendChild(cartItemsThumbnail);
     cartItemsDetailsBox.appendChild(cartItemsThumbnailBox);
@@ -170,7 +166,7 @@ function createCartItem(THUMBNAIL_SRC, prodName, discountedPrice, orderQuantity)
 
     return cartItemsDetailsBox;
 }
-function appendCartItems(targetParent, cartContent) {
+function appendCartItems(targetParent, hasEntries, cartContent) {
     /*
     Append all cart item to the parent element.
         :@param targetParent: Object - element where the cart items will be appended.
@@ -178,16 +174,17 @@ function appendCartItems(targetParent, cartContent) {
         :return undefined:
     */
     
-    const cartItemsArr = JSON.parse(cartContent);
-    for (let cartItemStr of cartItemsArr) {
-        const { prodName, discountedPrice , orderQuantity} = JSON.parse(cartItemStr);
-        // Process discounted price string
-        const regex = /[0-9]+.\d{2}/g;
-        const numDiscountedPrice = Number(discountedPrice.match(regex)[0]);
-        const numOrderQuantity = Number(orderQuantity);
-        console.log(numDiscountedPrice)
-        const THUMBNAIL_SRC = `./images/image-product-1-thumbnail.jpg`;
-        targetParent.appendChild(createCartItem(THUMBNAIL_SRC, prodName, numDiscountedPrice, numOrderQuantity));
+   if (hasEntries && cartContent !== 'undefined') {
+        const cartItemsArr = JSON.parse(cartContent);
+        for (let cartItemStr of cartItemsArr) {
+            const { prodName, discountedPrice , orderQuantity} = JSON.parse(cartItemStr);
+            // Process discounted price string
+            const regex = /[0-9]+.\d{2}/g;
+            const numDiscountedPrice = Number(discountedPrice.match(regex)[0]);
+            const numOrderQuantity = Number(orderQuantity);
+            const THUMBNAIL_SRC = `./images/image-product-1-thumbnail.jpg`;
+            targetParent.appendChild(createCartItem(THUMBNAIL_SRC, prodName, numDiscountedPrice, numOrderQuantity));
+        }
     }
 }
 function checkCartHandler() {
@@ -196,17 +193,18 @@ function checkCartHandler() {
         :return undefined:
     */
     // Check storage
-    const [hasEntries, cartContent] = checkCart("storageCart");
-    console.log(JSON.parse(cartContent))
+    const [hasEntries, cartContent] = Util.checkCart("storageCart");
     if (hasEntries) {
         // Toggle badge display
         const headerCartBtn = document.getElementsByClassName('header-cart-btn')[0];
-        toggleCartBadge(headerCartBtn);
+        toggleCartBadge(headerCartBtn, hasEntries, cartContent);
+        // Toggle empty cart alert.
+        Util.toggleCartAlert('alert-cart-empty', hasEntries, cartContent)
         // Update the badge number
-        updateCartItemCount(headerCartBtn, cartContent);
+        updateCartItemCount(headerCartBtn, hasEntries, cartContent);
         // Generate cart items
         const cartItemsParent = document.getElementsByClassName("cart-items-list")[0];
-        appendCartItems(cartItemsParent, cartContent);
+        appendCartItems(cartItemsParent, hasEntries, cartContent);
     }
 }
 function addCheckCartListener(loadHandler) {
