@@ -38,7 +38,6 @@ function toggleCartAlert(targetClass='alert-cart-empty', hasEntries, cartContent
         :@param cartContent: JSON - cart records in JSON format.
         :return undefined:
     */
-   console.log(hasEntries, cartContent)
     const emptyCartTextElement = document.getElementsByClassName(targetClass)[0];
     if (hasEntries && cartContent === 'undefined') {
         emptyCartTextElement.classList.toggle('d-none');
