@@ -64,6 +64,7 @@ function addToLocalStorage(storageKey, orderStr) {
         // Update order in local storage
         localStorage.setItem(storageKey, orderUpdatedArr);
     }
+    location.reload();
 }
 function toggleCartBadge(targetParent, hasEntries, cartContent) {
     /*

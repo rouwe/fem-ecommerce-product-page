@@ -6,6 +6,7 @@ function deleteCartItemHandler(e)  {
         :return undefined:
     */
     const targetText = e.path[2].getElementsByClassName('cart-item-product-name-box')[0].textContent;
+    console.log(e)
     const CART_KEY = 'storageCart';
     const [hasEntries, cartContent] = Util.checkCart(CART_KEY);
     if (hasEntries) {
@@ -26,7 +27,7 @@ function deleteCartItemHandler(e)  {
         const jsonCartContent = JSON.stringify(entryRecordsArray);
         Util.updateCart(CART_KEY, jsonCartContent);
     }
-    
+    location.reload();    
 }
 async function deleteCartItemListener(delIconClass, clickHandler) {
     /*
